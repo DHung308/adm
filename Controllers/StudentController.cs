@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Adm1.Data;
 using Adm1.Models;
+using Adm1.Models.Process;
 
 namespace Adm1.Controllers
 {
     public class StudentController : Controller
     {
         private readonly Adm1Context _context;
+        private readonly StringProcess _StringProcess;
 
         public StudentController(Adm1Context context)
         {
             _context = context;
+            _StringProcess = new StringProcess();
         }
 
         // GET: Student
@@ -49,7 +52,18 @@ namespace Adm1.Controllers
         public IActionResult Create()
         {
             ViewData["FaID"] = new SelectList(_context.Faculty, "FaID", "FaName");
-            return View();
+            string newStdID;
+            if(_context.Student.Any())
+            {
+                var lastStdID = _context.Student.OrderByDescending(S => S.ID).First();
+                newStdID = _StringProcess.AutoGenerateCode(lastStdID.ID);
+            }
+            else
+            {
+                newStdID = "STD001";
+            }
+            ViewBag.hienthi = newStdID;
+            return View(new Student { ID = newStdID });
         }
 
         // POST: Student/Create
