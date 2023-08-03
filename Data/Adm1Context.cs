@@ -19,5 +19,7 @@ namespace Adm1.Data
         public DbSet<Adm1.Models.Dongvat> Dongvat { get; set; } = default!;
 
         public DbSet<Adm1.Models.Cat> Cat { get; set; } = default!;
+
+        public DbSet<Adm1.Models.Faculty> Faculty { get; set; } = default!;
     }
 }

@@ -2,6 +2,7 @@
 using Adm1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Adm1.Migrations
 {
     [DbContext(typeof(Adm1Context))]
-    partial class Adm1ContextModelSnapshot : ModelSnapshot
+    [Migration("20230803072100_Create_Table_Faculty")]
+    partial class Create_Table_Faculty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.9");
@@ -61,17 +64,11 @@ namespace Adm1.Migrations
                     b.Property<string>("ID")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("FaID")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("FaID");
 
                     b.ToTable("Student");
                 });
@@ -85,17 +82,6 @@ namespace Adm1.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasDiscriminator().HasValue("Cat");
-                });
-
-            modelBuilder.Entity("Adm1.Models.Student", b =>
-                {
-                    b.HasOne("Adm1.Models.Faculty", "Faculty")
-                        .WithMany()
-                        .HasForeignKey("FaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Faculty");
                 });
 #pragma warning restore 612, 618
         }
