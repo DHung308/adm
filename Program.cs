@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Adm1.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<Adm1Context>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("Adm1Context") ?? throw new InvalidOperationException("Connection string 'Adm1Context' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
