@@ -1,8 +1,17 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Square";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>hello</h1>
+
+<form asp-controller="Home" asp-action="Index" method="post">
+    <label for="number">nhập a :</label>
+    <input type="number" name="a" />
+    <label for="number">nhập b :</label>
+    <input type="number" name="b" />
+    <label for="number">nhập c :</label>
+    <input type="number" name="c" />
+    <input type="submit" value="Calculate" />
+</form>
+<h2>@ViewBag.Message</h2>
+
